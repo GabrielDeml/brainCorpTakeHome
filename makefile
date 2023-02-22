@@ -3,13 +3,14 @@ CFLAGS = -Wall -Werror -std=c++11
 
 all: main
 
-main: main.cpp matrix.h linalg.h
-	$(CC) $(CFLAGS) main.cpp -o main
+main: main.cpp test.cpp matrix.h linalg.h
+	$(CC) $(CFLAGS) main.cpp test.cpp -o main
 
-test: main 
+
+runTest: main
 	./main
 
 clean:
-	rm -f main matrix.h.gch
+	rm -f main 
 
-.PHONY: clean test
+.PHONY: clean runTest

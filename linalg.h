@@ -4,58 +4,6 @@
 #include "matrix.h"
 
 /**
-
-    @brief Adds two matrices and returns the result as a new matrix
-    @tparam T The type of elements in the matrices
-    @param a The first matrix to add
-    @param b The second matrix to add
-    @return Matrix<T> The result of adding the two matrices
-*/
-template <typename T>
-Matrix<T> add(const Matrix<T> &a, const Matrix<T> &b) {
-    // Check if matrix dimensions match
-    if (a.width != b.width || a.height != b.height) {
-        throw std::invalid_argument("Matrix dimensions must match");
-    }
-    // Create a new matrix to store the result
-    Matrix<T> result(a.width, a.height);
-    // Iterate over each element in the matrices and add them together
-    for (int i = 0; i < a.height; i++) {
-        for (int j = 0; j < a.width; j++) {
-            result.update(j, i, a.index(j, i) + b.index(j, i));
-        }
-    }
-    // Return the resulting matrix
-    return result;
-}
-
-/**
- * @brief Subtracts two matrices and returns the result as a new matrix
- *
- * @tparam T The type of elements in the matrices
- * @param a The matrix to subtract from
- * @param b The matrix to subtract
- * @return Matrix<T> The result of subtracting the two matrices
- */
-template <typename T>
-Matrix<T> subtract(const Matrix<T> &a, const Matrix<T> &b) {
-    // Check if matrix dimensions match
-    if (a.width != b.width || a.height != b.height) {
-        throw std::invalid_argument("Matrix dimensions must match");
-    }
-    // Create a new matrix to store the result
-    Matrix<T> result(a.width, a.height);
-    // Iterate over each element in the matrices and subtract them
-    for (int i = 0; i < a.height; i++) {
-        for (int j = 0; j < a.width; j++) {
-            result.update(j, i, a.index(j, i) - b.index(j, i));
-        }
-    }
-    // Return the resulting matrix
-    return result;
-}
-
-/**
  * @brief Multiplies two matrices and returns the result as a new matrix
  *
  * @tparam T The type of elements in the matrices
@@ -106,30 +54,6 @@ Matrix<T> transpose(const Matrix<T> &a) {
     }
     // Return the transposed matrix
     return result;
-}
-
-/**
- * @brief
- *
- * @tparam T
- * @param a
- * @param b
- * @return true
- * @return false
- */
-template <typename T>
-bool isEqual(const Matrix<T> &a, const Matrix<T> &b) {
-    if (a.width != b.width || a.height != b.height) {
-        return false;
-    }
-    for (int i = 0; i < a.height; i++) {
-        for (int j = 0; j < a.width; j++) {
-            if (a.index(j, i) != b.index(j, i)) {
-                return false;
-            }
-        }
-    }
-    return true;
 }
 
 /**

@@ -41,8 +41,8 @@ private:
 template <typename T>
 Matrix<T>::Matrix(int width, int height) {
     // Check that the dimensions are positive
-    if (width < 0 || height < 0) {
-        throw std::invalid_argument("Matrix dimensions must be positive");
+    if (width <= 0 || height <= 0) {
+        throw std::invalid_argument("Matrix dimensions must be positive and non zero");
     }
 
     // Store the dimensions
@@ -108,7 +108,7 @@ void Matrix<T>::update(int x, int y, T value) {
  * @tparam T Matrix Type
  */
 template <typename T>
-void Matrix<T>::print(){
+void Matrix<T>::print() {
     // Loop through the rows of the matrix
     for (int i = 0; i < this->height; i++){
         // Loop through the columns of the matrix
