@@ -75,4 +75,24 @@ bool isEqual(const Matrix<T>& a, const Matrix<T>& b) {
     return true;
 }
 
+
+template <typename T>
+Matrix<T> identity(int size) {
+    Matrix<T> result(size, size);
+    for (int i = 0; i < size; i++) {
+        result.update(i, i, 1);
+    }
+    return result;
+}
+
+template <typename T>
+Matrix<T> fillMatrix(int x, int y, T value) {
+    Matrix<T> result(x, y);
+    for (int i = 0; i < y; i++) {
+        for (int j = 0; j < x; j++) {
+            result.update(j, i, value);
+        }
+    }
+    return result;
+}
 #endif // LINALG_H

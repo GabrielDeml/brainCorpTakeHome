@@ -3,19 +3,9 @@ CFLAGS = -Wall -Werror -std=c++11
 
 all: main
 
-main: main.o matrix.o linalg.o
-	$(CC) $(CFLAGS) main.o matrix.o linalg.o -o main
-
-main.o: main.cpp matrix.h
-	$(CC) $(CFLAGS) -c main.cpp
-
-matrix.o: matrix.h
-	$(CC) $(CFLAGS) -c matrix.h
-
-linalg.o: linalg.h
-	$(CC) $(CFLAGS) -c linalg.h
+main: main.cpp matrix.h linalg.h
+	$(CC) $(CFLAGS) main.cpp -o main
 
 clean:
-	rm -f main.o main matrix.o
-
+	rm -f main
 .PHONY: clean

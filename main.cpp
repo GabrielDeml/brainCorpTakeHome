@@ -4,36 +4,110 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Hello, world!" << std::endl;
+    std::cout << "=== Matrix Tests ===" << std::endl;
 
-    Matrix<int> m(3, 3);
-
-    m.update(0, 0, 1);
-
-    std::cout << m.index(0, 0) << std::endl;
-
-    m.print();
-
-    Matrix<int> a(3, 3);
-
-    // Create an idenity matrix
-    for (int i = 0; i < 3; i++) {
-        a.update(i, i, 1);
+    // 
+    Matrix<int> zeroMatrix = fillMatrix(3, 3, 0);
+    
+    std::cout << "=== Zero Matrix ===" << std::endl;
+    zeroMatrix.print();
+    bool ZeroMatrixFailed = false;
+    // Check that all values are zero
+    for (int i = 0; i < zeroMatrix.height; i++) {
+        for (int j = 0; j < zeroMatrix.width; j++) {
+            if (zeroMatrix.index(j, i) != 0) {
+                ZeroMatrixFailed = true;
+            }
+        }
+    }
+    if (ZeroMatrixFailed) {
+        std::cout << "Failed Zero Matrix Test" << std::endl;
+    } else {
+        std::cout << "Passed Zero Matrix Test" << std::endl;
     }
 
-    Matrix<int> b(3, 3);
+    Matrix<int> identityMatrix = identity<int>(3);
 
-    // Create a matrix with all 1s
+    std::cout << "=== Identity Matrix ===" << std::endl;
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            b.update(i, j, 1);
+    identityMatrix.print();
+
+    bool IdentityMatrixFailed = false;
+
+    // Check that all values match the identity 
+    for (int i = 0; i < identityMatrix.height; i++) {
+        for (int j = 0; j < identityMatrix.width; j++) {
+            if (i == j) {
+                if (identityMatrix.index(j, i) != 1) {
+                    IdentityMatrixFailed = true;
+                }
+            } else {
+                if (identityMatrix.index(j, i) != 0) {
+                    IdentityMatrixFailed = true;
+                }
+            }
         }
     }
 
-    Matrix<int> c = add(a, b);
+    if (IdentityMatrixFailed) {
+        std::cout << "Failed Identity Matrix Test" << std::endl;
+    } else {
+        std::cout << "Passed Identity Matrix Test" << std::endl;
+    }
 
+    Matrix<int> a = fillMatrix(3, 3, 1);
+
+    std::cout << "=== Matrix A ===" << std::endl;
+    a.print();
+
+    Matrix<int> b = fillMatrix(3, 3, 2);
+
+    std::cout << "=== Matrix B ===" << std::endl;
+    b.print();
+
+    Matrix<int> c = fillMatrix(3, 3, 3);
+
+    std::cout << "=== Matrix C ===" << std::endl;
     c.print();
-    
-    return 0;
+
+
+    Matrix<int> ab = multiply(a, b);
+
+    std::cout << "=== Matrix AB ===" << std::endl;
+
+    ab.print();
+
+    bool ABFailed = false;
+
+    // Check that all values match the identity
+    for (int i = 0; i < ab.height; i++) {
+        for (int j = 0; j < ab.width; j++) {
+            if (ab.index(j, i) != 6) {
+                ABFailed = true;
+            }
+        }
+    }
+
+    if (ABFailed) {
+        std::cout << "Failed Matrix AB Test" << std::endl;
+    } else {
+        std::cout << "Passed Matrix AB Test" << std::endl;
+    }
+
+    Matrix<int> abc = multiply(ab, c);
+
+    std::cout << "=== Matrix ABC ===" << std::endl;
+
+    abc.print();
+
+    bool ABCFailed = false;
+    // Check that all values match the identity
+    for (int i = 0; i < abc.height; i++) {
+        for (int j = 0; j < abc.width; j++) {
+            if (abc.index(j, i) != 18) {
+                ABCFailed = true;
+            }
+        }
+    }
+
 }
